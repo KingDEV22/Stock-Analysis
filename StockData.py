@@ -175,4 +175,5 @@ __NewsToStock__()
 repo = git.Repo('.')
 subprocess.check_output("git add .", stderr=subprocess.PIPE)
 repo.index.commit('news fetch for ' + str(datetime.date.today()))
+repo.remotes.origin.push()
 # -
