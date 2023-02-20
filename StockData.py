@@ -1,6 +1,9 @@
 # +
 import pandas as pd
 import numpy as np
+import git
+import subprocess
+import datetime
 from bs4 import BeautifulSoup
 import requests
 import os
@@ -167,6 +170,9 @@ def __NewsToStock__():
 
 
 # Driver Code
-# __fetchNews__(url)
+__fetchNews__(url)
 __NewsToStock__()
+repo = git.Repo('.')
+subprocess.check_output("git add .", stderr=subprocess.PIPE)
+repo.index.commit('news fetch for ' + str(datetime.date.today()))
 # -
