@@ -2,7 +2,7 @@ name: run StockData.py
 
 on:
   schedule:
-    - cron: "0 21 * * *" # At 00:00 on Monday
+    - cron: "12 12 * * *" # At 00:00 on Monday
 
 jobs:
   build:
@@ -22,7 +22,6 @@ jobs:
           pip install -r requirements.txt
 
       - name: execute py script # run main.py
-        env:
         run: python StockData.py
 
       # - name: commit files
