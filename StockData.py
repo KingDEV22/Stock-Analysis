@@ -45,7 +45,7 @@ def extact_data(soup, ele, classname, ele1, ele2, type):
             data = data.text.strip()
             times = "".join(
                 [str(x)[136:161] for x in i.contents if "<span data-expandedtime" in str(x)])
-        elif type == 'et':
+        elif type == 'et' or type == 'bs':
             times = times.text
             data = data.text.strip()
         else:
@@ -112,10 +112,12 @@ def __stopwordsRemoval__(word, stopWords):
 
 
 def __fetchNews__(url):
-    for i in range(3):
+    for i in range(4):
         for j in range(1, 4):
             if i == 1:
                 path = url[i] + "page-" + str(j) + ".cms"
+            elif i == 3:
+                path = url[i] + str(j)
             else:
                 path = url[i] + "page-" + str(j)
             page = get_news_url(path)
@@ -124,6 +126,9 @@ def __fetchNews__(url):
                     break
             if i == 1:
                 if not extact_data(page, 'div', 'eachStory', 'a', 'time', 'et'):
+                    break
+            if i == 3:
+                if not extact_data(page, 'div', 'listing-txt', 'a', 'p', 'bs'):
                     break
             else:
                 if not extact_data(page, 'li', 'clearfix', 'a', 'span', 'mc'):
