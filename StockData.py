@@ -21,7 +21,7 @@ with warnings.catch_warnings():
 
 
 url = ["https://www.livemint.com/market/stock-market-news/", "https://economictimes.indiatimes.com/markets/stocks/news/articlelist/msid-2146843,",
-       "https://www.moneycontrol.com/news/business/markets/"]
+       "https://www.moneycontrol.com/news/business/markets/", "https://www.business-standard.com/category/markets-news-1060101.htm/"]
 
 today = date.today() - timedelta(1)
 stop_dates = today.strftime('%d')
@@ -112,7 +112,7 @@ def __stopwordsRemoval__(word, stopWords):
 
 
 def __fetchNews__(url):
-    for i in range(4):
+    for i in range(3):
         for j in range(1, 4):
             if i == 1:
                 path = url[i] + "page-" + str(j) + ".cms"
