@@ -52,15 +52,18 @@ def extact_data(soup, ele, classname, ele1, ele2, type):
             data = data.get('title')
             times = times.text
         *get_dat, get_tim = times.split(',')
-        if type == 'mc':
-            hour, sec = (get_tim.strip().split(' ')[1].split(":"))
-            noon = datetime.time(int(hour), int(sec), 0)
-        else:
-            hour, sec = (get_tim.strip().split(' ')[0].split(":"))
-            noon = datetime.time(int(hour), int(sec), 0)
-
-        if stop_dates in get_dat[0] and stop_time >= noon:
+        if not type == 'bs':
+            if type == 'mc':
+                hour, sec = (get_tim.strip().split(' ')[1].split(":"))
+                noon = datetime.time(int(hour), int(sec), 0)
+            else:
+                hour, sec = (get_tim.strip().split(' ')[0].split(":"))
+                noon = datetime.time(int(hour), int(sec), 0)
+        if stop_dates in get_dat[0] and type == 'bs':
             return False
+        else:
+            if stop_dates in get_dat[0] and stop_time >= noon:
+                return False
 
         news.append(data)
         time.append(times)
