@@ -2,7 +2,7 @@
 import pandas as pd
 import git
 import subprocess
-import datetime
+from datetime import datetime
 from bs4 import BeautifulSoup
 import requests
 from datetime import date, timedelta
@@ -23,11 +23,14 @@ with warnings.catch_warnings():
 url = ["https://www.livemint.com/market/stock-market-news/", "https://economictimes.indiatimes.com/markets/stocks/news/articlelist/msid-2146843,",
        "https://www.moneycontrol.com/news/business/markets/", "https://www.business-standard.com/category/markets-news-1060101.htm/"]
 
-today = date.today() - timedelta(1)
-stop_dates = today.strftime('%d')
-stop_time = datetime.time(9, 0, 0)
 news = []
-time = []
+times = []
+today = datetime.now()
+month = today.strftime("%b")
+
+today = date.today() - timedelta(1)
+today = str(today) + ' 09:00 PM'
+stop_date = datetime.strptime(today, '%Y-%m-%d %I:%M %p')
 
 
 def get_news_url(url):
@@ -36,37 +39,87 @@ def get_news_url(url):
     return soup
 
 
-def extact_data(soup, ele, classname, ele1, ele2, type):
+def extact_data(soup, ele, classname, type):
     result = soup.find_all(ele, class_=classname)
     for i in result:
-        data = i.find(ele1)
-        times = i.find(ele2)
-        if type == 'mint':
-            data = data.text.strip()
-            times = "".join(
-                [str(x)[136:161] for x in i.contents if "<span data-expandedtime" in str(x)])
-        elif type == 'et' or type == 'bs':
-            times = times.text
-            data = data.text.strip()
-        else:
-            data = data.get('title')
-            times = times.text
-        *get_dat, get_tim = times.split(',')
-        if not type == 'bs':
-            if type == 'mc':
-                hour, sec = (get_tim.strip().split(' ')[1].split(":"))
-                noon = datetime.time(int(hour), int(sec), 0)
-            else:
-                hour, sec = (get_tim.strip().split(' ')[0].split(":"))
-                noon = datetime.time(int(hour), int(sec), 0)
-        if stop_dates in get_dat[0] and type == 'bs':
-            return False
-        else:
-            if stop_dates in get_dat[0] and stop_time >= noon:
-                return False
+        stop_time = ''
+        page_text = (i.get_text()).strip()
+        if type == 'mc':
+            page_text = str(page_text).replace(
+                i.find('p').text.strip(), "").strip()
 
-        news.append(data)
-        time.append(times)
+            page_text = page_text.split('IST')
+            stop_time = datetime.strptime(
+                str(page_text[0]).strip(), '%B %d, %Y %I:%M %p')
+            times.append(stop_time)
+            news.append(page_text[1])
+            print(page_text[1])
+
+        elif type == 'mint':
+            data = i.find('a')
+            tim = i.find('span')
+            print(data)
+            data = data.text.strip()
+            tim = "".join(
+                [str(x)[136:161] for x in i.contents if "<span data-expandedtime" in str(x)])
+            stop_time = datetime.strptime(str(tim), '%d %b %Y, %I:%M %p IST')
+            times.append(stop_time)
+            news.append(data)
+            print(data)
+
+        elif type == 'bs':
+            page_text = [x.strip("\n") for index, x in enumerate(
+                list(page_text.splitlines(True))) if index < 2]
+            stop_time = datetime.strptime(str(page_text[0]), '%B %d, %Y, %A')
+            times.append(stop_time)
+            news.append(page_text[1])
+            print(page_text[1])
+
+        elif type == 'et':
+            page_text = str(page_text).replace(i.find('p').text.strip(), "")
+            page_text = page_text.split(month)
+            stop_time = month + page_text[1]
+            stop_time = datetime.strptime(
+                str(stop_time).strip(), '%b %d, %Y, %I:%M %p IST')
+            times.append(stop_time)
+            news.append(page_text[0])
+            print(page_text[0])
+
+
+# if(stop_time <= stop_date):
+#             return False
+
+# def extact_data(soup, ele, classname, ele1, ele2, type):
+#     result = soup.find_all(ele, class_=classname)
+#     for i in result:
+#         data = i.find(ele1)
+#         times = i.find(ele2)
+#         if type == 'mint':
+#             data = data.text.strip()
+#             times = "".join(
+#                 [str(x)[136:161] for x in i.contents if "<span data-expandedtime" in str(x)])
+#         elif type == 'et' or type == 'bs':
+#             times = times.text
+#             data = data.text.strip()
+#         else:
+#             data = data.get('title')
+#             times = times.text
+#         *get_dat, get_tim = times.split(',')
+#         if not type == 'bs':
+#             if type == 'mc':
+#                 hour, sec = (get_tim.strip().split(' ')[1].split(":"))
+#                 noon = datetime.time(int(hour), int(sec), 0)
+#             else:
+#                 hour, sec = (get_tim.strip().split(' ')[0].split(":"))
+#                 noon = datetime.time(int(hour), int(sec), 0)
+#         if stop_dates in get_dat[0] and type == 'bs':
+#             return False
+#         else:
+#             if stop_dates in get_dat[0] and stop_time >= noon:
+#                 return False
+
+#         news.append(data)
+#         time.append(times)
 
 
 def news_return(data1, data2):
@@ -125,22 +178,22 @@ def __fetchNews__(url):
                 path = url[i] + "page-" + str(j)
             page = get_news_url(path)
             if i == 0:
-                if not extact_data(page, 'div', 'headlineSec', 'a', 'span', 'mint'):
+                if not extact_data(page, 'div', 'headlineSec', 'mint'):
                     break
             if i == 1:
-                if not extact_data(page, 'div', 'eachStory', 'a', 'time', 'et'):
+                if not extact_data(page, 'div', 'eachStory', 'et'):
                     break
             if i == 3:
-                if not extact_data(page, 'div', 'listing-txt', 'a', 'p', 'bs'):
+                if not extact_data(page, 'div', 'listing-txt', 'bs'):
                     break
             else:
-                if not extact_data(page, 'li', 'clearfix', 'a', 'span', 'mc'):
+                if not extact_data(page, 'li', 'clearfix', 'mc'):
                     break
 
     stock_data = pd.DataFrame({'Headline': news,
-                               'Date': time})
-    stock_data.to_csv('.\\raw_news\\NewsData-' +
-                      str(datetime.date.today()) + '.csv')
+                               'Date': times})
+    stock_data.to_csv('./raw_news/NewsData-' +
+                      str(date.today()) + '.csv')
 
 
 def __NewsToStock__():
@@ -174,9 +227,9 @@ def __NewsToStock__():
 
 # Driver Code
 __fetchNews__(url)
-__NewsToStock__()
-repo = git.Repo('.')
-subprocess.check_output("git add .", stderr=subprocess.PIPE)
-repo.index.commit('news fetch for ' + str(datetime.date.today()))
-repo.remotes.origin.push()
+# __NewsToStock__()
+# repo = git.Repo('.')
+# subprocess.check_output("git add .", stderr=subprocess.PIPE)
+# repo.index.commit('news fetch for ' + str(datetime.date.today()))
+# repo.remotes.origin.push()
 # -
