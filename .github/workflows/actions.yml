@@ -2,7 +2,7 @@ name: run StockData.py
 
 on:
   schedule:
-    - cron: '12 12 * * *' # At 00:00 on Monday
+    - cron: '* * * * *' # At 00:00 on Monday
 
 jobs:
   build:
