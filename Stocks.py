@@ -12,10 +12,6 @@ bsnews =[]
 bstimes = []
 ecnews =[]
 ectimes = []
-# money_control_data ={'news': mcnews,'time':mctimes}
-# mint_data = {'news': mnews,'time':mtimes}
-# business_standard_data = {'news': bsnews,'time':bstimes}
-# economic_times_data = {'news': ecnews,'time':ectimes}
 
 
 today = date.today() - timedelta(1)
@@ -48,6 +44,7 @@ def economic_news():
             if stop_time <= stop_date:
                 return
             # economic_times_data[data]=stop_time
+           
             ecnews.append(data)
             ectimes.append(stop_time)
            
@@ -134,12 +131,9 @@ if __name__ == "__main__":
     mint.join()
     business_standard.join()
     economic_times.join()
-    print(len(mnews))
-    print(len(ecnews))
-    print(len(mcnews))
-    print(len(bsnews))
-    news = mcnews+mnews+ectimes+bsnews
-    times = mtimes+mctimes+ectimes+bstimes
+
+    news = mcnews+mnews+ecnews+bsnews
+    times = mctimes+mtimes+ectimes+bstimes
     data = pd.DataFrame({'Headline':news,'Date':times})
     data.to_csv('./raw_news/NewsData-' +
                       str(date.today()) + '.csv')
