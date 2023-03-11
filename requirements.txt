@@ -2,3 +2,9 @@ pandas >= 1.4.2
 requests >= 2.27.1
 nltk >= 3.7
 beautifulsoup4
+scikit-learn
+transformers
+SpacyTextBlob
+wordcloud
+spacy
+
