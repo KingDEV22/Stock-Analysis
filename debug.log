@@ -1,0 +1,122 @@
+2023-03-19 01:14:36,487 [INFO] Object Created
+2023-03-19 01:14:36,487 [INFO] Economic times object created
+2023-03-19 01:14:36,487 [INFO] Object Created
+2023-03-19 01:14:36,487 [INFO] Mint object created
+2023-03-19 01:14:36,487 [INFO] Object Created
+2023-03-19 01:14:36,487 [INFO] Money control object created
+2023-03-19 01:14:36,495 [INFO] Object Created
+2023-03-19 01:14:36,495 [INFO] Business Standard object created
+2023-03-19 01:14:36,495 [INFO] Economic times thread created
+2023-03-19 01:14:36,495 [INFO] Mint thread created
+2023-03-19 01:14:36,495 [INFO] Money control thread created
+2023-03-19 01:14:36,495 [INFO] Business Standard thread created
+2023-03-19 01:14:36,495 [INFO] Economic times thread started
+2023-03-19 01:14:36,495 [INFO] Mint thread started
+2023-03-19 01:14:36,498 [INFO] money control thread started
+2023-03-19 01:14:36,498 [INFO] business standard thread started
+2023-03-19 01:14:36,576 [INFO] Data fetched from URL
+2023-03-19 01:14:36,659 [INFO] Extacted necessary data from soup 
+2023-03-19 01:14:36,660 [INFO] Data fetched from economic news
+2023-03-19 01:14:36,660 [INFO] news and time extracted
+2023-03-19 01:14:36,661 [INFO] Time formated
+2023-03-19 01:14:36,661 [INFO] Data formated
+2023-03-19 01:14:36,661 [INFO] Fetching end at 2023-03-18 17:35:00 where given times was 2023-03-18 23:55:00
+2023-03-19 01:14:36,663 [INFO] Data fetched from URL
+2023-03-19 01:14:36,665 [INFO] Data fetched from URL
+2023-03-19 01:14:36,741 [INFO] Extacted necessary data from soup 
+2023-03-19 01:14:36,773 [INFO] Data fetched from business standard news
+2023-03-19 01:14:36,786 [INFO] Extacted necessary data from soup 
+2023-03-19 01:14:36,786 [INFO] news and time extracted
+2023-03-19 01:14:36,787 [INFO] Data fetched from mint news
+2023-03-19 01:14:36,787 [INFO] Data formated
+2023-03-19 01:14:36,788 [INFO] news and time extracted
+2023-03-19 01:14:36,789 [INFO] Time formated
+2023-03-19 01:14:36,791 [INFO] Time formated
+2023-03-19 01:14:36,792 [INFO] Fetching end at 2023-03-17 where given times was 2023-03-18 23:55:00
+2023-03-19 01:14:36,792 [INFO] Data formated
+2023-03-19 01:14:36,793 [INFO] Data fetched from URL
+2023-03-19 01:14:36,794 [INFO] Fetching end at 2023-03-18 22:07:00 where given times was 2023-03-18 23:55:00
+2023-03-19 01:14:36,855 [INFO] Extacted necessary data from soup 
+2023-03-19 01:14:36,856 [INFO] Data fetched from money control news
+2023-03-19 01:14:36,856 [INFO] news and time extracted
+2023-03-19 01:14:36,857 [INFO] Time formated
+2023-03-19 01:14:36,857 [INFO] Data formated
+2023-03-19 01:14:36,857 [INFO] Fetching end at 2023-03-18 13:02:00 where given times was 2023-03-18 23:55:00
+2023-03-19 01:14:36,858 [INFO] All thread completed
+2023-03-19 01:14:36,860 [INFO] csv created
+2023-03-19 01:17:16,796 [INFO] Economic times object created
+2023-03-19 01:17:16,796 [INFO] Mint object created
+2023-03-19 01:17:16,796 [INFO] Money control object created
+2023-03-19 01:17:16,796 [INFO] Business Standard object created
+2023-03-19 01:17:16,796 [INFO] Economic times thread created
+2023-03-19 01:17:16,796 [INFO] Mint thread created
+2023-03-19 01:17:16,796 [INFO] Money control thread created
+2023-03-19 01:17:16,796 [INFO] Business Standard thread created
+2023-03-19 01:17:16,797 [INFO] Economic times thread started
+2023-03-19 01:17:16,798 [INFO] Mint thread started
+2023-03-19 01:17:16,798 [INFO] money control thread started
+2023-03-19 01:17:16,798 [INFO] business standard thread started
+2023-03-19 01:17:16,946 [INFO] Extacted necessary data from soup 
+2023-03-19 01:17:16,948 [INFO] Data fetched from economic news
+2023-03-19 01:17:16,949 [INFO] news and time extracted
+2023-03-19 01:17:16,950 [INFO] Time formated
+2023-03-19 01:17:16,950 [INFO] Data formated
+2023-03-19 01:17:16,950 [INFO] Fetching end at 2023-03-18 17:35:00 where given times was 2023-03-18 23:55:00
+2023-03-19 01:17:17,023 [INFO] Extacted necessary data from soup 
+2023-03-19 01:17:17,024 [INFO] Data fetched from mint news
+2023-03-19 01:17:17,024 [INFO] news and time extracted
+2023-03-19 01:17:17,025 [INFO] Time formated
+2023-03-19 01:17:17,025 [INFO] Data formated
+2023-03-19 01:17:17,025 [INFO] Fetching end at 2023-03-18 22:07:00 where given times was 2023-03-18 23:55:00
+2023-03-19 01:17:17,102 [INFO] Extacted necessary data from soup 
+2023-03-19 01:17:17,110 [INFO] Data fetched from business standard news
+2023-03-19 01:17:17,142 [INFO] news and time extracted
+2023-03-19 01:17:17,149 [INFO] Extacted necessary data from soup 
+2023-03-19 01:17:17,149 [INFO] Data formated
+2023-03-19 01:17:17,149 [INFO] Data fetched from money control news
+2023-03-19 01:17:17,150 [INFO] Time formated
+2023-03-19 01:17:17,150 [INFO] news and time extracted
+2023-03-19 01:17:17,151 [INFO] Fetching end at 2023-03-17 where given times was 2023-03-18 23:55:00
+2023-03-19 01:17:17,152 [INFO] Time formated
+2023-03-19 01:17:17,152 [INFO] Data formated
+2023-03-19 01:17:17,152 [INFO] Fetching end at 2023-03-18 13:02:00 where given times was 2023-03-18 23:55:00
+2023-03-19 01:17:17,152 [INFO] All thread completed
+2023-03-19 01:17:17,155 [INFO] csv created
+2023-03-19 01:17:40,911 [INFO] Economic times object created
+2023-03-19 01:17:40,912 [INFO] Mint object created
+2023-03-19 01:17:40,912 [INFO] Money control object created
+2023-03-19 01:17:40,912 [INFO] Business Standard object created
+2023-03-19 01:17:40,912 [INFO] Economic times thread created
+2023-03-19 01:17:40,912 [INFO] Mint thread created
+2023-03-19 01:17:40,912 [INFO] Money control thread created
+2023-03-19 01:17:40,912 [INFO] Business Standard thread created
+2023-03-19 01:17:40,913 [INFO] Economic times thread started
+2023-03-19 01:17:40,913 [INFO] Mint thread started
+2023-03-19 01:17:40,914 [INFO] money control thread started
+2023-03-19 01:17:40,915 [INFO] business standard thread started
+2023-03-19 01:17:41,235 [INFO] Extacted necessary data from soup 
+2023-03-19 01:17:41,235 [INFO] Data fetched from economic news
+2023-03-19 01:17:41,236 [INFO] news and time extracted
+2023-03-19 01:17:41,236 [INFO] Time formated
+2023-03-19 01:17:41,237 [INFO] Data formated
+2023-03-19 01:17:41,237 [INFO] Fetching end at 2023-03-18 17:35:00 where given times was 2023-03-18 23:55:00
+2023-03-19 01:17:41,298 [INFO] Extacted necessary data from soup 
+2023-03-19 01:17:41,298 [INFO] Data fetched from money control news
+2023-03-19 01:17:41,298 [INFO] news and time extracted
+2023-03-19 01:17:41,299 [INFO] Time formated
+2023-03-19 01:17:41,300 [INFO] Data formated
+2023-03-19 01:17:41,301 [INFO] Fetching end at 2023-03-18 13:02:00 where given times was 2023-03-18 23:55:00
+2023-03-19 01:17:41,401 [INFO] Extacted necessary data from soup 
+2023-03-19 01:17:41,408 [INFO] Data fetched from business standard news
+2023-03-19 01:17:41,424 [INFO] news and time extracted
+2023-03-19 01:17:41,445 [INFO] Extacted necessary data from soup 
+2023-03-19 01:17:41,445 [INFO] Data formated
+2023-03-19 01:17:41,446 [INFO] Data fetched from mint news
+2023-03-19 01:17:41,447 [INFO] Time formated
+2023-03-19 01:17:41,448 [INFO] news and time extracted
+2023-03-19 01:17:41,448 [INFO] Fetching end at 2023-03-17 where given times was 2023-03-18 23:55:00
+2023-03-19 01:17:41,450 [INFO] Time formated
+2023-03-19 01:17:41,450 [INFO] Data formated
+2023-03-19 01:17:41,450 [INFO] Fetching end at 2023-03-18 22:07:00 where given times was 2023-03-18 23:55:00
+2023-03-19 01:17:41,451 [INFO] All thread completed
+2023-03-19 01:17:41,455 [INFO] csv created
