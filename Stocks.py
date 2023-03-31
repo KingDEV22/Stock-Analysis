@@ -13,8 +13,6 @@ bstimes = []
 ecnews =[]
 ectimes = []
 
-news_data = {}
-
 
 today = date.today() - timedelta(1)
 today = str(today) + ' 09:00 PM'
@@ -30,7 +28,9 @@ def extract_data_from_page(page,ele,classname):
 
 
 def economic_news():
-    for x in range(700,702):
+    today = datetime.now()
+    month = today.strftime("%b")
+    for x in range(1,4):
         url = "https://economictimes.indiatimes.com/markets/stocks/news/articlelist/msid-2146843,"
         page = fetch_from_url(url+ "page-" + str(x) + ".cms")        
         result = extract_data_from_page(page,'div', 'eachStory') 
@@ -41,19 +41,17 @@ def economic_news():
             stop_time = datetime.strptime(
                 str(times).strip(), '%b %d, %Y, %I:%M %p IST')
             data = data.text.strip()
-            # if stop_time <= stop_date:
-            #     return
-            lock.acquire()
+            if stop_time <= stop_date:
+                return
             # economic_times_data[data]=stop_time
-            news_data[data] = stop_time
-            lock.release()
-            # ecnews.append(data)
-            # ectimes.append(stop_time)
+           
+            ecnews.append(data)
+            ectimes.append(stop_time)
            
 
 
 def mint_news():
-    for x in range(600,889):
+    for x in range(1,4):
         url = "https://www.livemint.com/market/stock-market-news/"
         page = fetch_from_url(url+"page-" + str(x))
         
@@ -65,22 +63,19 @@ def mint_news():
             data = data.text.strip()
             tim = "".join(
                     [str(x)[136:161] for x in i.contents if "<span data-expandedtime" in str(x)])
-            tim = tim.replace('IS|IST|IT','')
-            stop_time = datetime.strptime(str(tim), '%d %b %Y, %I:%M %p')
-            # if stop_time <= stop_date:
-            #     return
+    
+            stop_time = datetime.strptime(str(tim), '%d %b %Y, %I:%M %p IST')
+            if stop_time <= stop_date:
+                return
             # mint_data[data] = stop_time
-            lock.acquire()
-            news_data[data] = stop_time
-            lock.release()
-            # mnews.append(data)
-            # mtimes.append(stop_time)
+            mnews.append(data)
+            mtimes.append(stop_time)
             
 
         
 
 def money_control_news():
-    for x in range(700,710):
+    for x in range(1,4):
         url = "https://www.moneycontrol.com/news/business/markets/"
         page = fetch_from_url(url+"page-" + str(x))
         
@@ -94,19 +89,16 @@ def money_control_news():
             page_text = page_text.split('IST')
             stop_time = datetime.strptime(
                     str(page_text[0]).strip(), '%B %d, %Y %I:%M %p')
-            # if stop_time <= stop_date:
-            #    return
+            if stop_time <= stop_date:
+               return
             # money_control_data[(page_text[1])] = stop_time
-            lock.acquire()
-            news_data[page_text[1]] = stop_time
-            lock.release()
-            # mcnews.append(page_text[1])
-            # mctimes.append(stop_time)
+            mcnews.append(page_text[1])
+            mctimes.append(stop_time)
 
 
 def business_standard_news():
     date_stop = datetime.now().date()
-    for x in range(600,792):
+    for x in range(1,4):
         url = "https://www.business-standard.com/category/markets-news-1060101.htm/"
         page = fetch_from_url(url + str(x))
         result = extract_data_from_page(page,'div', 'listing-txt') 
@@ -118,43 +110,33 @@ def business_standard_news():
       
             stop_time = datetime.strptime(str(page_text[0]), '%B %d, %Y, %A').date()
            
-            # if stop_time < date_stop:
-            #    return
-            lock.acquire()
+            if stop_time < date_stop:
+               return
             # business_standard_data[(page_text[1])] = stop_time
-            news_data[page_text[1]] = stop_time
-            lock.release()
-            # bsnews.append(page_text[1])
-            # bstimes.append(stop_time)
-
-
-def filter_text():
-    fiter_text = ['Multibagger','What to expect','What SGX Nifty, other factors','Tata steel shares: Should you buy, sell or hold after stock split']
-    replace_text = ['Stock market today:','Should you buy, sell or hold?','Should you buy, sell or hold?']
+            bsnews.append(page_text[1])
+            bstimes.append(stop_time)
 
 
 if __name__ == "__main__":
-    lock = threading.Lock()
     money_control = threading.Thread(target=money_control_news, name="moneycontrol")
     mint = threading.Thread(target=mint_news, name="mint")
     business_standard = threading.Thread(target=business_standard_news, name="business_standard")
     economic_times = threading.Thread(target=economic_news, name="economic_times")
-    #money_control.start()
+    money_control.start()
     mint.start()
-    #business_standard.start()
-    # economic_times.start()
+    business_standard.start()
+    economic_times.start()
 
-    # money_control.join()
+    money_control.join()
     mint.join()
-    #business_standard.join()
-    # economic_times.join()
-    print(news_data)
+    business_standard.join()
+    economic_times.join()
 
-    # news = mcnews+mnews+ecnews+bsnews
-    # times = mctimes+mtimes+ectimes+bstimes
-    # data = pd.DataFrame({'Headline':news,'Date':times})
-    # data.to_csv('./raw_news/NewsData-' +
-    #                   str(date.today()) + '.csv')
+    news = mcnews+mnews+ecnews+bsnews
+    times = mctimes+mtimes+ectimes+bstimes
+    data = pd.DataFrame({'Headline':news,'Date':times})
+    data.to_csv('./raw_news/NewsData-' +
+                      str(date.today()) + '.csv')
     
     # repo = git.Repo('.')
     # subprocess.check_output("git add .", stderr=subprocess.PIPE)
