@@ -223,6 +223,7 @@ def handle_dataset(data):
     fg.drop_duplicates(subset="Text",
                        keep="first", inplace=True)
     fg.to_csv('./raw_news/dailynews.csv', index=False)
+    logging.info("Dataset created")
 
 
 if __name__ == "__main__":
@@ -255,11 +256,4 @@ if __name__ == "__main__":
     data = data.iloc[:, :2]
     data['Sentiment'] = sentimet
     logging.info("Sentiment calculated")
-    # data.to_csv('./raw_news/dailynews.csv', index=False)
     handle_dataset(data)
-
-    # repo = git.Repo('.')
-    # subprocess.check_output("git add .", stderr=subprocess.PIPE)
-    # repo.index.commit('news fetch for ' + str(datetime.date.today()))
-    # repo.remotes.origin.push()
-    # -
