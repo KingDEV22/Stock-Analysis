@@ -7,7 +7,6 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import requests
 import pickle
-import os
 import numpy as np
 from datetime import datetime, date, timedelta
 from tensorflow.keras.preprocessing.sequence import pad_sequences

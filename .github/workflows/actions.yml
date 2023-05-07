@@ -1,10 +1,8 @@
 name: run Stock.py
 
-# on:
-#   schedule:
-#     - cron: "00 17 * * *" # At 21:00 everyday.
-
-on: workflow_dispatch
+on:
+  schedule:
+    - cron: '00 18 * * *' # At 23:00 everyday as github runner does not provide accuracy.
 
 jobs:
   build:
