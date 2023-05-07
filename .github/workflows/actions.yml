@@ -1,8 +1,10 @@
 name: run Stock.py
 
-on:
-  schedule:
-    - cron: "00 17 * * *" # At 21:00 everyday.
+# on:
+#   schedule:
+#     - cron: "00 17 * * *" # At 21:00 everyday.
+
+on: workflow_dispatch
 
 jobs:
   build:
@@ -14,7 +16,7 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.9" # install the python version needed
+          python-version: '3.9' # install the python version needed
 
       - name: install python packages
         run: |
