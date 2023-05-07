@@ -1,6 +1,6 @@
 import threading
 import nltk
-nltk.download()
+nltk.download('stopwords')
 import re
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
