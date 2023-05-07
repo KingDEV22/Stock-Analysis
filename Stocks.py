@@ -51,7 +51,7 @@ def extract_data_from_page(page, ele, classname):
     return page.find_all(ele, class_=classname)
 
 
-def economic_news():
+def economic_news_func():
     logging.info("Extracting data from economic times news")
     for page_no in range(1, 4):
         url = "https://economictimes.indiatimes.com/markets/stocks/news/articlelist/msid-2146843,"
@@ -72,7 +72,7 @@ def economic_news():
             economic_times_datetimes.append(format_date(stop_time))
 
 
-def mint_news():
+def mint_news_func():
     logging.info("Extracting data from mint news")
     for page_no in range(1, 4):
         url = "https://www.livemint.com/market/stock-market-news/"
@@ -95,7 +95,7 @@ def mint_news():
             mint_datetimes.append(format_date(stop_time))
 
 
-def money_control_news():
+def money_control_news_func():
     logging.info("Extracting data from money control news")
     for page_no in range(1, 4):
         url = "https://www.moneycontrol.com/news/business/markets/"
@@ -118,7 +118,7 @@ def money_control_news():
             money_control_datetimes.append(format_date(stop_time))
 
 
-def business_standard_news():
+def business_standard_news_func():
     date_stop = datetime.now().date()
     logging.info("Extracting data from business standard news")
     url = "https://www.business-standard.com/markets/news"
@@ -227,12 +227,12 @@ if __name__ == "__main__":
 
     #Building the threads to get data from all four major news channels
     money_control = threading.Thread(
-        target=money_control_news, name="moneycontrol")
-    mint = threading.Thread(target=mint_news, name="mint")
+        target=money_control_news_func, name="moneycontrol")
+    mint = threading.Thread(target=mint_news_func, name="mint")
     business_standard = threading.Thread(
-        target=business_standard_news, name="business_standard")
+        target=business_standard_news_func, name="business_standard")
     economic_times = threading.Thread(
-        target=economic_news, name="economic_times")
+        target=economic_news_func, name="economic_times")
 
     # Starting the Threads to get data from all four major news channels
     money_control.start()
