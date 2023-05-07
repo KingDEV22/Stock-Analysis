@@ -1,6 +1,7 @@
 import threading
 import nltk
-nltk.download()
+nltk.download('stopwords')
+nltk.download('punkt')
 import re
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
