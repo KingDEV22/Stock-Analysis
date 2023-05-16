@@ -10,4 +10,6 @@ spacy
 tensorflow
 streamlit
 keras
+plotly
+yfinance
 

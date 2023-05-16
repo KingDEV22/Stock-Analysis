@@ -2,7 +2,7 @@ name: run Stock.py
 
 on:
   schedule:
-    - cron: '00 18 * * *' # At 23:00 everyday as github runner does not provide accuracy.
+    - cron: "00 18 * * *" # At 23:00 everyday as github runner does not provide accuracy.
 
 jobs:
   build:
@@ -14,7 +14,7 @@ jobs:
       - name: setup python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9' # install the python version needed
+          python-version: "3.9" # install the python version needed
 
       - name: install python packages
         run: |
@@ -32,7 +32,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add -A
-          git diff-index --quiet HEAD || (git commit -a -m "updated logs" --allow-empty)
+          git diff-index --quiet HEAD || (git commit -a -m "new fetch and sentiment applied" --allow-empty)
 
       - name: push changes
         uses: ad-m/github-push-action@v0.6.0
