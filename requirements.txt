@@ -12,4 +12,7 @@ streamlit
 keras
 plotly
 yfinance
+seaborn
+matplotlib
+numpy
 
