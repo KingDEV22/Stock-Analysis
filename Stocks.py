@@ -274,7 +274,6 @@ if __name__ == "__main__":
     data = pd.DataFrame({'Text': news, 'Date': times})
     logging.info("dataframe created")
     data['Date'] = pd.to_datetime(data['Date']).dt.date
-    data['Company'] = data['Text'].apply(apply_company)
     data = filter_data(data)
     data = ml_model(data)
     data = dp_model(data)
@@ -282,4 +281,5 @@ if __name__ == "__main__":
     data = data.iloc[:, :2]
     data['Sentiment'] = sentiment
     logging.info("Sentiment calculated")
+    data['Company'] = data['Text'].apply(apply_company)
     handle_dataset(data)
