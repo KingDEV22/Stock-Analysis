@@ -8,4 +8,6 @@ SpacyTextBlob
 wordcloud
 spacy
 tensorflow
+streamlit
+keras
 

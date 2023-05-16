@@ -22,7 +22,7 @@ logging.basicConfig(
     datefmt='%Y-%m-%d %H:%M:%S'  # Set the date and time format
 )
 
-#Global variables 
+# Global variables
 money_control_news = []
 money_control_datetimes = []
 mint_news = []
@@ -38,6 +38,8 @@ today = str(today) + ' 09:00 PM'
 stop_date = datetime.strptime(today, '%Y-%m-%d %I:%M %p')
 
 # Methods declared
+
+
 def fetch_from_url(url):
     headers = {
         'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36'}
@@ -74,7 +76,7 @@ def economic_news_func():
 
 def mint_news_func():
     logging.info("Extracting data from mint news")
-    for page_no in range(1, 4):
+    for page_no in range(750, 890):
         url = "https://www.livemint.com/market/stock-market-news/"
         page = fetch_from_url(url+"page-" + str(page_no))
 
@@ -222,10 +224,11 @@ def handle_dataset(data):
     fg.to_csv('./raw_news/dailynews.csv', index=False)
     logging.info("Dataset created")
 
+
 # Main function execution
 if __name__ == "__main__":
 
-    #Building the threads to get data from all four major news channels
+    # Building the threads to get data from all four major news channels
     money_control = threading.Thread(
         target=money_control_news_func, name="moneycontrol")
     mint = threading.Thread(target=mint_news_func, name="mint")
@@ -240,7 +243,7 @@ if __name__ == "__main__":
     business_standard.start()
     economic_times.start()
 
-    # Joining the four threads so that furthur steps run after all the 
+    # Joining the four threads so that furthur steps run after all the
     # data are being extracted first
     money_control.join()
     mint.join()
@@ -248,8 +251,10 @@ if __name__ == "__main__":
     economic_times.join()
 
     # Starting main execution
-    news = money_control_news + mint_news + economic_times_news + business_standard_news
-    times = money_control_datetimes + mint_datetimes + economic_times_datetimes + business_standard_datetimes
+    news = money_control_news + mint_news + \
+        economic_times_news + business_standard_news
+    times = money_control_datetimes + mint_datetimes + \
+        economic_times_datetimes + business_standard_datetimes
 
     # Creating dataframes
     data = pd.DataFrame({'Text': news, 'Date': times})
