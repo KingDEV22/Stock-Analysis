@@ -37,6 +37,10 @@ today = date.today() - timedelta(1)
 today = str(today) + ' 09:00 PM'
 stop_date = datetime.strptime(today, '%Y-%m-%d %I:%M %p')
 
+
+# loading comapany filter
+check_set = pickle.load(open('./pkl/check_comapny.pkl', 'rb'))
+
 # Methods declared
 
 
@@ -225,6 +229,16 @@ def handle_dataset(data):
     logging.info("Dataset created")
 
 
+def apply_company(text):
+    text = text.replace('[^\w\s]', ' ')
+    text = text.lower()
+    text = set(text.split())
+    for x in text:
+        if x in check_set:
+            return x
+    return "N/A"
+
+
 # Main function execution
 if __name__ == "__main__":
 
@@ -260,6 +274,7 @@ if __name__ == "__main__":
     data = pd.DataFrame({'Text': news, 'Date': times})
     logging.info("dataframe created")
     data['Date'] = pd.to_datetime(data['Date']).dt.date
+    data['Company'] = data['Text'].apply(apply_company)
     data = filter_data(data)
     data = ml_model(data)
     data = dp_model(data)
