@@ -221,11 +221,11 @@ def calculate_sentiment(data):
 
 
 def handle_dataset(data):
-    df1 = pd.read_csv('./raw_news/dailynews.csv')
+    df1 = pd.read_csv('stock_data.csv')
     fg = pd.concat([df1, data], ignore_index=True)
     fg.drop_duplicates(subset="Text",
                        keep="first", inplace=True)
-    fg.to_csv('./raw_news/dailynews.csv', index=False)
+    fg.to_csv('stock_data.csv', index=False)
     logging.info("Dataset created")
 
 
