@@ -1,8 +1,6 @@
-# Stock-Analysis
+# Stock News Analyzer
 [![run Stock.py](https://github.com/KingDEV22/Stock-Analysis/actions/workflows/actions.yml/badge.svg)](https://github.com/KingDEV22/Stock-Analysis/actions/workflows/actions.yml)
 
-
-# Stock News Analyzer
 
 Stock News Analyzer is a Python-based project that aims to provide sentiment analysis of stock-related news articles. It utilizes web scraping techniques using Beautiful Soup to extract news articles from top news websites. The project incorporates various deep learning algorithms such as LSTM, BiGRU, and machine learning models like logistic regression to predict the sentiment of the news.
 
