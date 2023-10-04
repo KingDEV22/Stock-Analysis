@@ -11,7 +11,6 @@ import numpy as np
 from datetime import datetime, date, timedelta
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.models import load_model
-
 import logging
 
 # Configure logging
